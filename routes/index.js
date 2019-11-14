@@ -5,6 +5,7 @@ const Contact = require("../models/Contact");
 // Pegar todos os contatos
 router.get("/all", (req, res, next) => {
   Contact.find()
+    .sort({ name: 1 })
     .then(deps => {
       res.status(200).json(deps);
     })
@@ -19,7 +20,7 @@ router.get("/:idContato", (req, res, next) => {
     .then(dep => {
       res.status(200).json(dep);
     })
-    .catch(e => console.log(e));
+    .catch(e => res.status(400).json(err));
 });
 
 router.post("/add", (req, res, next) => {
@@ -42,7 +43,7 @@ router.delete("/:idContato", (req, res, next) => {
     .then(dep => {
       res.status(200).json(dep);
     })
-    .catch(e => console.log(e));
+    .catch(e => res.status(400).json(err));
 });
 
 router.put("/:idContato", (req, res, next) => {
@@ -57,7 +58,7 @@ router.put("/:idContato", (req, res, next) => {
     .then(dep => {
       res.status(200).json(dep);
     })
-    .catch(e => console.log(e));
+    .catch(e => res.status(400).json(err));
 });
 
 module.exports = router;
